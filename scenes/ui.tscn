@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=3 uid="uid://dukotpr26t8vd"]
+
+[ext_resource type="Theme" uid="uid://bqrsdps28c3ot" path="res://Theme/Theme.tres" id="1_nt7q6"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -454.0
+offset_right = 275.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="You Died" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.5082, 0.5082, 0.77, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 120
+text = "You Died!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="You scored" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.5082, 0.5082, 0.77, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 120
+text = "Score: XX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Highscore" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.5082, 0.5082, 0.77, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 120
+text = "Highscore: XXX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Try Again" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = 105.0
+offset_right = 196.0
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_nt7q6")
+theme_override_font_sizes/font_size = 70
+text = "Try Again"
+icon_alignment = 1
+expand_icon = true
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = 271.0
+offset_right = 126.0
+offset_bottom = 405.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_nt7q6")
+theme_override_font_sizes/font_size = 70
+text = "Quit
+"
+icon_alignment = 1
+expand_icon = true

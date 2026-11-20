@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bmjw0irqaf571"]
+
+[ext_resource type="Script" uid="uid://8v25qx5ui335" path="res://scripts/asteroid.gd" id="1_6mo6b"]
+[ext_resource type="Texture2D" uid="uid://bkj6xw64tbjpf" path="res://sprites/asteroid.png" id="1_akfqu"]
+[ext_resource type="Texture2D" uid="uid://ei8adb7guaxk" path="res://sprites/skins/doodle/asteroid_doodle.png" id="3_t4se3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6mo6b"]
+radius = 152.0033
+
+[node name="Asteroid" type="RigidBody2D" unique_id=1984830179 node_paths=PackedStringArray("sprite_2d")]
+collision_layer = 2
+collision_mask = 3
+linear_damp_mode = 1
+script = ExtResource("1_6mo6b")
+spawnHeight = -950
+spawnWidth = 1400
+velocityRangeX = 1100
+velocityY = 1000
+sprite_2d = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=893176878]
+texture = ExtResource("1_akfqu")
+
+[node name="SkinTest" type="Sprite2D" parent="." unique_id=115190401]
+visible = false
+texture_filter = 1
+position = Vector2(-3, 6)
+scale = Vector2(0.421875, 0.421875)
+texture = ExtResource("3_t4se3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=404386786]
+position = Vector2(-13, 0)
+shape = SubResource("CircleShape2D_6mo6b")

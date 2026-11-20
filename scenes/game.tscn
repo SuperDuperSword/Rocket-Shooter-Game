@@ -1,0 +1,504 @@
+[gd_scene format=3 uid="uid://blo18phx783jr"]
+
+[ext_resource type="PackedScene" uid="uid://cxbhh4ho4a1hf" path="res://scenes/music.tscn" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dart4nun2p1ch" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://dpas04cryui6e" path="res://scripts/logic.gd" id="1_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://cq8s1p0dwnac5" path="res://sprites/space.jpg" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://s6def2qare6j" path="res://scripts/adaptive_controller.gd" id="3_ca42v"]
+[ext_resource type="Script" uid="uid://cb6y1i5nr6mdm" path="res://scripts/mouse_follow.gd" id="3_dinhu"]
+[ext_resource type="Script" uid="uid://dhl7v38hsmxpc" path="res://scripts/keyboard_controller.gd" id="4_rysoc"]
+[ext_resource type="Texture2D" uid="uid://blxtbkd15qdi0" path="res://sprites/skins/doodle/background.webp" id="4_vtaks"]
+[ext_resource type="Theme" uid="uid://bqrsdps28c3ot" path="res://Theme/Theme.tres" id="5_iywne"]
+[ext_resource type="Texture2D" uid="uid://4tlh88uf1yh4" path="res://sprites/right.png" id="6_gee14"]
+[ext_resource type="Texture2D" uid="uid://cdrrel7o6jkc5" path="res://sprites/shoot.png" id="7_0tnpc"]
+[ext_resource type="Script" uid="uid://dc5gsisvsogl3" path="res://scripts/legacy_controller.gd" id="8_dinhu"]
+[ext_resource type="Texture2D" uid="uid://bt44d6ukjtcp4" path="res://sprites/left.png" id="8_vtaks"]
+[ext_resource type="Script" uid="uid://bmrp774e64qck" path="res://scripts/in_game_button.gd" id="9_0tnpc"]
+[ext_resource type="Script" uid="uid://b58o84vdd4cpg" path="res://scripts/aimable_touch_controller.gd" id="13_kvuet"]
+[ext_resource type="Texture2D" uid="uid://8l1ihqem5xm8" path="res://sprites/modern_controller_arrow.png" id="14_trtic"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kvpfn"]
+radius = 128.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vtaks"]
+radius = 169.40477
+
+[sub_resource type="Curve" id="Curve_hnjpv"]
+_limits = [-1.0, 1.0, -1.0, 1.0]
+_data = [Vector2(-1, -1), 0.0, 0.0, 0, 0, Vector2(-0.25, 0), 4.0251937, 0.0, 0, 0, Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 0), 0.0, 4.0081716, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+metadata/_snap_enabled = true
+metadata/_snap_count = 16
+
+[sub_resource type="Gradient" id="Gradient_trtic"]
+offsets = PackedFloat32Array(0, 0.95539033, 1)
+colors = PackedColorArray(0.45999998, 0.53199995, 1, 1, 0.4324, 0.50007993, 0.94, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nrx41"]
+gradient = SubResource("Gradient_trtic")
+width = 48
+height = 48
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eksu0"]
+content_margin_top = 30.0
+bg_color = Color(0.24109179, 0.3646381, 0.6638508, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ce65h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n75sb"]
+bg_color = Color(0.17860001, 0.23566332, 0.38, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[node name="Game" type="Node2D" unique_id=685539134]
+
+[node name="Music" parent="." unique_id=936273653 instance=ExtResource("1_lbhrr")]
+unique_name_in_owner = true
+
+[node name="Logic" type="Node" parent="." unique_id=1148711513 node_paths=PackedStringArray("legacy_controller", "modern_controller")]
+unique_name_in_owner = true
+script = ExtResource("1_yqjtg")
+legacy_controller = NodePath("../InGameUI/Buttons")
+modern_controller = NodePath("../InGameUI/AimableTouchController")
+
+[node name="Timer" type="Timer" parent="Logic" unique_id=773304063]
+editor_description = "Wait Between Waves"
+one_shot = true
+autostart = true
+
+[node name="Asteroid Increase Timer" type="Timer" parent="Logic" unique_id=369118669]
+one_shot = true
+
+[node name="WaitToRetry" type="Timer" parent="Logic" unique_id=65141180]
+one_shot = true
+
+[node name="AdaptiveController" type="Node" parent="Logic" unique_id=1627412797]
+script = ExtResource("3_ca42v")
+
+[node name="KeyboardController" type="Node" parent="Logic/AdaptiveController" unique_id=1668625489]
+script = ExtResource("4_rysoc")
+
+[node name="MouseFollow" type="Marker2D" parent="." unique_id=851623547]
+position = Vector2(428, -254)
+gizmo_extents = 100.0
+script = ExtResource("3_dinhu")
+
+[node name="Space" type="Sprite2D" parent="." unique_id=2043283434]
+z_index = -5
+scale = Vector2(1.4815667, 1.481567)
+texture = ExtResource("2_lnu2h")
+region_rect = Rect2(0, 0, 1201.489, 532.927)
+
+[node name="SkinTest" type="Sprite2D" parent="." unique_id=953100728]
+visible = false
+z_index = -5
+texture_filter = 1
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_vtaks")
+region_rect = Rect2(0, 0, 640, 264)
+
+[node name="Player" parent="." unique_id=1805500083 groups=["player"] instance=ExtResource("1_uwrxv")]
+z_index = 5
+position = Vector2(0, 445)
+collision_mask = 6
+reload = 0.8
+lerp_speed = 3
+area_border = 900.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2139384714]
+zoom = Vector2(0.84, 0.84)
+limit_enabled = false
+limit_left = -2000
+limit_top = -1500
+limit_right = 2000
+limit_bottom = 1500
+
+[node name="Bullets" type="Node2D" parent="." unique_id=171854150]
+unique_name_in_owner = true
+
+[node name="Asteroids" type="Node2D" parent="." unique_id=2015346421]
+unique_name_in_owner = true
+
+[node name="Death Screen" type="Control" parent="." unique_id=514636193]
+unique_name_in_owner = true
+visible = false
+z_index = 10
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.3, 1.3)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Death Screen" unique_id=573378968]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -454.0
+offset_right = 275.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="You Died" type="Label" parent="Death Screen/VBoxContainer" unique_id=2020963338]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.5082, 0.5082, 0.77, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 120
+text = "You Died!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="You scored" type="Label" parent="Death Screen/VBoxContainer" unique_id=582548407]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.5082, 0.5082, 0.77, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 120
+text = "Score: XX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Highscore" type="Label" parent="Death Screen/VBoxContainer" unique_id=310023519]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.5082, 0.5082, 0.77, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 120
+text = "Highscore: XXX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Try Again" type="Button" parent="Death Screen" unique_id=1074983199]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = 105.0
+offset_right = 196.0
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_iywne")
+theme_override_font_sizes/font_size = 70
+text = "Try Again"
+icon_alignment = 1
+expand_icon = true
+
+[node name="Quit" type="Button" parent="Death Screen" unique_id=697173453]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = 271.0
+offset_right = 126.0
+offset_bottom = 405.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_iywne")
+theme_override_font_sizes/font_size = 70
+text = "Quit
+"
+icon_alignment = 1
+expand_icon = true
+
+[node name="ToOptions" type="Button" parent="Death Screen" unique_id=148935407]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = 271.0
+offset_right = 126.0
+offset_bottom = 405.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_iywne")
+theme_override_font_sizes/font_size = 70
+text = " Options "
+icon_alignment = 1
+expand_icon = true
+
+[node name="InGameUI" type="Node2D" parent="." unique_id=2065374460]
+z_index = 6
+
+[node name="Score" type="Label" parent="InGameUI" unique_id=2085978050]
+unique_name_in_owner = true
+visible = false
+offset_left = -1088.0
+offset_top = -604.0
+offset_right = -511.0
+offset_bottom = -390.4375
+theme_override_colors/font_shadow_color = Color(0.5082, 0.5082, 0.77, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 153
+text = "Score: 0"
+
+[node name="Time" type="Label" parent="InGameUI" unique_id=1154696740]
+unique_name_in_owner = true
+offset_left = -1088.0
+offset_top = -604.0
+offset_right = -121.0
+offset_bottom = -390.4375
+theme_override_colors/font_shadow_color = Color(0.5082, 0.5082, 0.77, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 153
+text = "Time: 0:00.00"
+
+[node name="ReloadBar" type="ProgressBar" parent="InGameUI" unique_id=1817090491]
+unique_name_in_owner = true
+visible = false
+offset_left = 190.0
+offset_top = -577.0
+offset_right = 1072.0
+offset_bottom = -414.0
+theme_override_font_sizes/font_size = 100
+step = 0.0
+value = 100.0
+show_percentage = false
+
+[node name="ProgressLabel" type="Label" parent="InGameUI/ReloadBar" unique_id=1002143089]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -73.5
+offset_right = 175.0
+offset_bottom = 73.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Ready"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="Node2D" parent="InGameUI" unique_id=200467842 node_paths=PackedStringArray("shoot_button", "left_button", "right_button")]
+unique_name_in_owner = true
+script = ExtResource("8_dinhu")
+shoot_button = NodePath("Shoot")
+left_button = NodePath("Left")
+right_button = NodePath("Right")
+
+[node name="Right" type="TouchScreenButton" parent="InGameUI/Buttons" unique_id=533747103]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-792, 327)
+scale = Vector2(0.96875, 0.96875)
+texture_normal = ExtResource("6_gee14")
+shape = SubResource("CircleShape2D_kvpfn")
+script = ExtResource("9_0tnpc")
+left_pos = Vector2(-792, 327)
+right_pos = Vector2(846, 364)
+
+[node name="Area2D" type="Area2D" parent="InGameUI/Buttons/Right" unique_id=2028135037]
+position = Vector2(128, 128)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InGameUI/Buttons/Right/Area2D" unique_id=1839492280]
+shape = SubResource("CircleShape2D_vtaks")
+
+[node name="Blocker" type="Control" parent="InGameUI/Buttons/Right" unique_id=951045537]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -360.25812
+offset_top = -32.0
+offset_right = 656.51624
+offset_bottom = 346.8387
+
+[node name="Left" type="TouchScreenButton" parent="InGameUI/Buttons" unique_id=30318201]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-1051, 327)
+scale = Vector2(0.96875, 0.96875)
+texture_normal = ExtResource("8_vtaks")
+shape = SubResource("CircleShape2D_kvpfn")
+script = ExtResource("9_0tnpc")
+left_pos = Vector2(-1051, 327)
+right_pos = Vector2(580.9999, 364)
+
+[node name="Area2D" type="Area2D" parent="InGameUI/Buttons/Left" unique_id=564467841]
+position = Vector2(128, 128)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InGameUI/Buttons/Left/Area2D" unique_id=77358419]
+shape = SubResource("CircleShape2D_vtaks")
+
+[node name="Shoot" type="TouchScreenButton" parent="InGameUI/Buttons" unique_id=929973919]
+unique_name_in_owner = true
+visible = false
+position = Vector2(737, 240.99998)
+scale = Vector2(1.3046879, 1.3046879)
+texture_normal = ExtResource("7_0tnpc")
+shape = SubResource("CircleShape2D_kvpfn")
+script = ExtResource("9_0tnpc")
+left_pos = Vector2(737, 240.99998)
+right_pos = Vector2(-1064, 241)
+
+[node name="Area2D" type="Area2D" parent="InGameUI/Buttons/Shoot" unique_id=1558681289]
+position = Vector2(128, 128)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InGameUI/Buttons/Shoot/Area2D" unique_id=1333466991]
+shape = SubResource("CircleShape2D_vtaks")
+
+[node name="Blocker" type="Control" parent="InGameUI/Buttons/Shoot" unique_id=1163494293]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -175.52087
+offset_top = -19.161667
+offset_right = 305.05383
+offset_bottom = 307.3532
+
+[node name="AimableTouchController" type="Control" parent="InGameUI" unique_id=1097604495]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_kvuet")
+movement_curve = SubResource("Curve_hnjpv")
+left_pos = Vector2(-1015, 470)
+right_pos = Vector2(570, 488)
+
+[node name="Blocker" type="Control" parent="InGameUI/AimableTouchController" unique_id=1643673506]
+anchors_preset = 0
+offset_left = 493.0
+offset_top = 370.0
+offset_right = 1217.0
+offset_bottom = 671.0
+
+[node name="HSlider" type="HSlider" parent="InGameUI/AimableTouchController" unique_id=237474744]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 488.0
+offset_right = 978.0
+offset_bottom = 544.0
+theme_override_icons/grabber = SubResource("GradientTexture2D_nrx41")
+theme_override_icons/grabber_highlight = SubResource("GradientTexture2D_nrx41")
+theme_override_icons/grabber_disabled = SubResource("GradientTexture2D_nrx41")
+theme_override_styles/slider = SubResource("StyleBoxFlat_eksu0")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_ce65h")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_ce65h")
+min_value = -1.0
+max_value = 1.0
+step = 0.0
+
+[node name="Panel" type="Panel" parent="InGameUI/AimableTouchController/HSlider" unique_id=1060563812]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -7.0
+offset_right = 8.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n75sb")
+
+[node name="Arrows" type="Control" parent="InGameUI/AimableTouchController/HSlider" unique_id=995501051]
+modulate = Color(0.18039216, 0.23529412, 0.38039216, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -2.0
+offset_right = 9.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="Right" type="TextureRect" parent="InGameUI/AimableTouchController/HSlider/Arrows" unique_id=915699546]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_right = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("14_trtic")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Left" type="TextureRect" parent="InGameUI/AimableTouchController/HSlider/Arrows" unique_id=84201712]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_right = 35.0
+grow_vertical = 2
+texture = ExtResource("14_trtic")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[connection signal="timeout" from="Logic/Timer" to="Logic" method="wave"]
+[connection signal="timeout" from="Logic/Asteroid Increase Timer" to="Logic" method="asteroid_increase"]
+[connection signal="died" from="Player" to="InGameUI/Buttons" method="hide"]
+[connection signal="died" from="Player" to="InGameUI/Buttons/Right/Blocker" method="hide"]
+[connection signal="died" from="Player" to="InGameUI/Buttons/Shoot/Blocker" method="hide"]
+[connection signal="died" from="Player" to="InGameUI/AimableTouchController/Blocker" method="hide"]
+[connection signal="shot" from="Player" to="Logic" method="set_bullet_skin"]
+[connection signal="pressed" from="Death Screen/Try Again" to="Logic" method="refresh_scene"]
+[connection signal="pressed" from="Death Screen/Quit" to="Logic" method="quit"]
+[connection signal="pressed" from="Death Screen/ToOptions" to="Logic" method="to_settings"]
+[connection signal="body_entered" from="InGameUI/Buttons/Right/Area2D" to="InGameUI/Buttons/Right" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="InGameUI/Buttons/Right/Area2D" to="InGameUI/Buttons/Right" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="InGameUI/Buttons/Left/Area2D" to="InGameUI/Buttons/Left" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="InGameUI/Buttons/Left/Area2D" to="InGameUI/Buttons/Left" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="InGameUI/Buttons/Shoot/Area2D" to="InGameUI/Buttons/Shoot" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="InGameUI/Buttons/Shoot/Area2D" to="InGameUI/Buttons/Shoot" method="_on_area_2d_body_exited"]
+[connection signal="drag_ended" from="InGameUI/AimableTouchController/HSlider" to="InGameUI/AimableTouchController" method="_on_slider_drag_ended"]
