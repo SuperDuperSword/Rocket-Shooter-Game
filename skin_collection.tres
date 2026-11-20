@@ -1,0 +1,72 @@
+[gd_resource type="Resource" script_class="SkinCollection" format=3 uid="uid://bcsqd2nmbllp"]
+
+[ext_resource type="Script" uid="uid://dcve5t1nfrlks" path="res://scripts/skin_collection.gd" id="1_6pbav"]
+[ext_resource type="Script" uid="uid://bont4buqprq2u" path="res://scripts/game_skin.gd" id="2_ho7f0"]
+[ext_resource type="Texture2D" uid="uid://bkj6xw64tbjpf" path="res://sprites/asteroid.png" id="3_qd7tw"]
+[ext_resource type="Texture2D" uid="uid://cqf25tw0ndxjq" path="res://sprites/bullets.png" id="4_m64qe"]
+[ext_resource type="Texture2D" uid="uid://cq8s1p0dwnac5" path="res://sprites/space.jpg" id="4_vnqfy"]
+[ext_resource type="Texture2D" uid="uid://b7rih1r8srr4n" path="res://sprites/Rocket.png" id="5_uec1m"]
+[ext_resource type="FontVariation" uid="uid://b8ncicoy2o7wk" path="res://Theme/font.tres" id="6_rwv7u"]
+[ext_resource type="Texture2D" uid="uid://d304vgwfa0ji8" path="res://sprites/skins/pixel/bullet.png" id="6_uec1m"]
+[ext_resource type="Texture2D" uid="uid://3felyhofori4" path="res://sprites/skins/pixel/asteroid.png" id="6_vx6d2"]
+[ext_resource type="Texture2D" uid="uid://b4kbfg1yrvldg" path="res://sprites/skins/pixel/rocket_ship.png" id="7_vx6d2"]
+[ext_resource type="Texture2D" uid="uid://ds5x5l15116fp" path="res://sprites/skins/pixel/space.webp" id="8_t7a38"]
+[ext_resource type="FontFile" uid="uid://dyvgjvcp5w0pd" path="res://Theme/pixelify_sans/PixelifySans-VariableFont_wght.ttf" id="11_3jqy2"]
+[ext_resource type="Texture2D" uid="uid://ei8adb7guaxk" path="res://sprites/skins/doodle/asteroid_doodle.png" id="13_5hwo7"]
+[ext_resource type="Texture2D" uid="uid://blxtbkd15qdi0" path="res://sprites/skins/doodle/background.webp" id="14_aqtyd"]
+[ext_resource type="Texture2D" uid="uid://dhfuonwnap35b" path="res://sprites/skins/doodle/bullet_doodle.png" id="15_eeshj"]
+[ext_resource type="FontFile" uid="uid://6w6el1hmamxn" path="res://Theme/comic_sans_ms.ttf" id="16_1oji8"]
+[ext_resource type="Texture2D" uid="uid://bpfv3hvl6ew0s" path="res://sprites/skins/doodle/rocket_doodle.png" id="17_obayo"]
+
+[sub_resource type="Resource" id="Resource_vx6d2"]
+resource_name = "Default"
+script = ExtResource("2_ho7f0")
+font = ExtResource("6_rwv7u")
+player_skin = ExtResource("5_uec1m")
+bullet_skin = ExtResource("4_m64qe")
+bullet_pos = Vector2(1.5, 0)
+asteroid_skin = ExtResource("3_qd7tw")
+bg_image = ExtResource("4_vnqfy")
+bg_scale = Vector2(1.4815667, 1.481567)
+metadata/_custom_type_script = "uid://bont4buqprq2u"
+
+[sub_resource type="Resource" id="Resource_6pbav"]
+resource_name = "Pixel Art"
+script = ExtResource("2_ho7f0")
+is_pixelart = true
+font = ExtResource("11_3jqy2")
+player_skin = ExtResource("7_vx6d2")
+player_scale = Vector2(13.224611, 13.224611)
+player_pos = Vector2(0, -9)
+player_rotation = -45.0
+bullet_skin = ExtResource("6_uec1m")
+bullet_scale = Vector2(36.366, 36.366)
+bullet_pos = Vector2(0, 46)
+bullet_rotation = -45.0
+asteroid_skin = ExtResource("6_vx6d2")
+asteroid_scale = Vector2(13.1875, 13.1875)
+bg_image = ExtResource("8_t7a38")
+bg_scale = Vector2(8.128125, 8.128126)
+metadata/_custom_type_script = "uid://bont4buqprq2u"
+
+[sub_resource type="Resource" id="Resource_rs713"]
+resource_name = "Doodle"
+script = ExtResource("2_ho7f0")
+font = ExtResource("16_1oji8")
+player_skin = ExtResource("17_obayo")
+player_scale = Vector2(0.38085938, 0.3730469)
+player_pos = Vector2(6, 9)
+bullet_skin = ExtResource("15_eeshj")
+bullet_scale = Vector2(0.5820313, 0.546875)
+bullet_pos = Vector2(8.000001, 16)
+asteroid_skin = ExtResource("13_5hwo7")
+asteroid_scale = Vector2(0.421875, 0.421875)
+asteroid_pos = Vector2(-3, 6)
+bg_image = ExtResource("14_aqtyd")
+bg_scale = Vector2(0.6, 0.6)
+metadata/_custom_type_script = "uid://bont4buqprq2u"
+
+[resource]
+script = ExtResource("1_6pbav")
+skins = Array[ExtResource("2_ho7f0")]([SubResource("Resource_vx6d2"), SubResource("Resource_6pbav"), SubResource("Resource_rs713")])
+metadata/_custom_type_script = "uid://dcve5t1nfrlks"
